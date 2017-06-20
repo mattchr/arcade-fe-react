@@ -1,35 +1,6 @@
 import React, { Component } from 'react';
-import './GamesList.css';
 import KeyHandler, {KEYUP} from 'react-key-handler';
-
-class Game extends Component {
-  render() {
-    var pac_man_dots = <div className={'pacman-dots ' + (this.props.active ? 'active ' : ' ')}/>
-
-    return (
-      <div
-        onClick={this.props.onSelected}
-        tabIndex={this.props.tabIndex}
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          border: '2px solid midnightblue',
-          outline: 'none'
-        }}
-      >
-        {pac_man_dots}
-        <div key={this.props.game.key}
-          style={{
-            color: this.props.active ? 'yellow' : 'orange',
-            textAlign: 'center',
-            fontSize: 'xx-large'
-          }}
-        >{this.props.game.name}</div>
-        {pac_man_dots}
-      </div>
-    )
-  }
-}
+import Game from './Game';
 
 class GamesList extends Component {
   constructor(props) {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import marquee from './mame_marquee.jpg';
 import GamesList from './GamesList';
 
