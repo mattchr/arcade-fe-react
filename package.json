@@ -6,6 +6,7 @@
     "keymaster": "^1.6.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-key-handler": "^0.3.0",
     "react-list-select": "^0.3.0"
   },
   "devDependencies": {

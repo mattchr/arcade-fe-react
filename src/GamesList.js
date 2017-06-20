@@ -1,67 +1,56 @@
 import React, { Component } from 'react';
 import './GamesList.css';
-import key from 'keymaster';
-
+import KeyHandler, {KEYUP} from 'react-key-handler';
 
 class Game extends Component {
   render() {
-    key('down', this.downArrow)
+    var pac_man_dots = <div className={'pacman-dots ' + (this.props.active ? 'active ' : ' ')}/>
 
     return (
-        <div className="game-item"
-        key={this.props.game.key}
-        style={this.props.active ? {
-          color: 'blue'
-        } : {
-          color: 'black'
-        }}
+      <div
         onClick={this.props.onSelected}
-        onKeyPress={this.keyDown}
         tabIndex={this.props.tabIndex}
-        >
-          {this.props.game.name}
-        </div>
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          border: '2px solid midnightblue',
+          outline: 'none'
+        }}
+      >
+        {pac_man_dots}
+        <div key={this.props.game.key}
+          style={{
+            color: this.props.active ? 'yellow' : 'orange',
+            textAlign: 'center',
+            fontSize: 'xx-large'
+          }}
+        >{this.props.game.name}</div>
+        {pac_man_dots}
+      </div>
     )
-  }
-
-  downArrow() {
-    console.log("sup");
   }
 }
 
 class GamesList extends Component {
   constructor(props) {
     super(props);
-    this.state = {selected: null};
-  }
-
-  getGames() {
-      return [
-          {
-            key: 'dkong',
-            name: 'Donkey Kong'
-          },
-          {
-            key: 'umk3',
-            name: 'Ultimate Mortal Kombat 3'
-          },
-          {
-            key: 'sfa',
-            name: 'Street Fighter 3'
-          }
-      ]
+    this.state = {
+      activeKey: this.props.games[0].key
+    };
   }
 
   selectItem(key) {
-    this.setState({activeKey: key})
+    if (this.state.activeKey !== key) {
+      this.setState({activeKey: key})
+      return;
+    }
+
+    this.launchGame(this.state.activeKey);
   }
 
-  keyDown(e) {
-    console.log(e.which);
-  }
   render() {
-    var activeKey = this.state.activeKey || this.getGames()[0].key;
-    const listItems = this.getGames().map((game, index) =>
+    var activeKey = this.state.activeKey || this.props.games[0].key;
+    const listItems = this.props.games.map((game, index) =>
         <Game game={game} key={game.key}
           onSelected={this.selectItem.bind(this, game.key)}
           active={activeKey === game.key}
@@ -69,10 +58,46 @@ class GamesList extends Component {
         />
     );
     return (
-      <div className="GamesList" onKeyPress={this.keyDown}>
-        {listItems}
+      <div>
+        <KeyHandler keyEventName={KEYUP} keyValue="ArrowDown" onKeyHandle={this.downArrow.bind(this)} />
+        <KeyHandler keyEventName={KEYUP} keyValue="ArrowUp" onKeyHandle={this.upArrow.bind(this)} />
+        <KeyHandler keyEventName={KEYUP} keyValue="Enter" onKeyHandle={this.enterKey.bind(this)} />
+        <div className="GamesList">
+          {listItems}
+        </div>
       </div>
     );
+  }
+
+  getSelectedGameIndex() {
+    return this.props.games.findIndex(game => {
+      return game.key === this.state.activeKey
+    })
+  }
+
+  downArrow() {
+    var selectedIndex = this.getSelectedGameIndex()
+    var next = this.props.games[selectedIndex + 1]
+    if (next) {
+      this.setState({activeKey: next.key})
+    }
+  }
+
+  upArrow() {
+    var selectedIndex = this.getSelectedGameIndex()
+    if (selectedIndex === 0) {
+      return
+    }
+    var previous = this.props.games[selectedIndex - 1]
+    this.setState({activeKey: previous.key})
+  }
+
+  enterKey() {
+    this.launchGame(this.state.activeKey);
+  }
+
+  launchGame(game_key) {
+    console.log(game_key)
   }
 }
 

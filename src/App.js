@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import marquee from './mame_marquee.jpg';
 import GamesList from './GamesList';
-// import key from 'keymaster';
-//
-// key('down', function() {
-//   console.log("hello world");
-// })
 
 class App extends Component {
 
   render() {
+    var games = [
+        {
+          key: 'dkong',
+          name: 'Donkey Kong'
+        },
+        {
+          key: 'umk3',
+          name: 'Ultimate Mortal Kombat 3'
+        },
+        {
+          key: 'sfa',
+          name: 'Street Fighter 3'
+        }
+    ];
     return (
-      <div className="App">
+      <div className="App"
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'black'
+        }}
+      >
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <img src={marquee} alt=""
+          style={{position: 'static', marginLeft: '10%', width: '80%'}}
+        />
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <GamesList />
+        <GamesList games={games}/>
       </div>
     );
   }
