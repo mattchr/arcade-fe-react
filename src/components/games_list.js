@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import KeyHandler, {KEYUP} from 'react-key-handler';
-import Game from './Game';
+import Game from './game';
 
 class GamesList extends Component {
   constructor(props) {

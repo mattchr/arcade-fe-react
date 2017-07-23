@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import marquee from './mame_marquee.jpg';
-import GamesList from './GamesList';
+import marquee from '../art/mame_marquee.jpg';
+import GamesList from './games_list';
 
 class App extends Component {
 
