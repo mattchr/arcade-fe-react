@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectedGameBorder from './SelectedGameBorder';
+import SelectedGameBorder from './selected_game_border';
 
 class Game extends Component {
   render() {
