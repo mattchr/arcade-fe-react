@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import marquee from '../art/mame_marquee.jpg';
-import GamesList from './games_list';
+import GamesList from '../containers/games_list';
 
 class App extends Component {
 
   render() {
-    var games = [
-        {
-          key: 'dkong',
-          name: 'Donkey Kong'
-        },
-        {
-          key: 'umk3',
-          name: 'Ultimate Mortal Kombat 3'
-        },
-        {
-          key: 'sfa',
-          name: 'Street Fighter 3'
-        }
-    ];
     return (
       <div className="App"
         style={{
@@ -38,7 +24,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <GamesList games={games}/>
+        <GamesList />
       </div>
     );
   }

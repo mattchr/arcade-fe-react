@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import KeyHandler, {KEYUP} from 'react-key-handler';
-import Game from './game';
+
+import Game from '../components/game';
 
 class GamesList extends Component {
   constructor(props) {
@@ -72,4 +75,10 @@ class GamesList extends Component {
   }
 }
 
-export default GamesList;
+function mapStateToProps(state, props) {
+  return {
+    games: state.games
+  };
+}
+
+export default connect(mapStateToProps)(GamesList);

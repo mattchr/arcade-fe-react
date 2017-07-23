@@ -19,7 +19,8 @@ class Game extends Component {
           style={{
             color: this.props.active ? 'yellow' : 'orange',
             textAlign: 'center',
-            fontSize: 'xx-large'
+            fontSize: 'xx-large',
+            fontFamily: 'courier'
           }}
         >{this.props.game.name}</div>
         <SelectedGameBorder active={this.props.active}/>
