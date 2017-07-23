@@ -12,7 +12,7 @@ class GamesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: this.props.games[0] ? this.props.games[0].key : 'a'
+      activeKey: null
     };
 
     axios.get('http://localhost:5000/api/v1/roms/list').then(response => {
@@ -31,8 +31,8 @@ class GamesList extends Component {
   }
 
   render() {
-    const activeKey = this.state.activeKey || this.props.games[0].key;
-    console.log(activeKey);
+    const activeKey = this.state.activeKey || (this.props.games[0] ? this.props.games[0].key : null);
+    console.log(activeKey, this.props.games);
     const fourGames = this.getFourGames(this.props.games, activeKey);
     const listItems = fourGames.map((game, index) =>
         <Game game={game} key={game.key}
